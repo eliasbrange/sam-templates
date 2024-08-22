@@ -1,0 +1,30 @@
+version: 0.1
+default:
+  global:
+    parameters:
+      stack_name: {{ cookiecutter.project_name }}
+  build:
+    parameters:
+      cached: true
+      parallel: true
+  validate:
+    parameters:
+      lint: true
+  deploy:
+    parameters:
+      capabilities: CAPABILITY_IAM
+      confirm_changeset: false
+      resolve_s3: true
+      region: eu-west-1
+  package:
+    parameters:
+      resolve_s3: true
+  sync:
+    parameters:
+      watch: true
+  local_start_api:
+    parameters:
+      warm_containers: EAGER
+  local_start_lambda:
+    parameters:
+      warm_containers: EAGER

@@ -1,0 +1,52 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  {{ cookiecutter.project_name }}
+
+Metadata: &esbuild
+  BuildMethod: esbuild
+  BuildProperties:
+    Minify: true
+    Target: "es2020"
+    Sourcemap: true
+
+Globals:
+  Function:
+    Runtime: nodejs20.x
+    MemorySize: 1769
+    Architectures:
+      - arm64
+    Environment:
+      Variables:
+        POWERTOOLS_SERVICE_NAME: {{ cookiecutter.project_name }}
+        POWERTOOLS_METRICS_NAMESPACE: {{ cookiecutter.project_name }}
+    Timeout: 30
+    Tracing: Active
+    LoggingConfig:
+      LogFormat: JSON
+      LogGroup: !Ref StackLogGroup
+
+Resources:
+  StackLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Ref "AWS::StackName"
+      RetentionInDays: 30
+
+  ApiFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/functions
+      Handler: api.handler
+      Events:
+        TodoApi:
+          Type: HttpApi
+          Properties:
+            Path: /hello
+            Method: get
+    Metadata: *esbuild
+
+Outputs:
+  ApiURL:
+    Description: "API Gateway endpoint URL"
+    Value: !Sub "https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com"

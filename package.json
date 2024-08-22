@@ -1,0 +1,14 @@
+{
+  "name": "sam-templates",
+  "author": "Elias Brange",
+  "version": "1.0.0",
+  "description": "",
+  "license": "MIT",
+  "scripts": {
+    "biome": "biome check .",
+    "biome:fix": "biome check --apply ."
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.8.3"
+  }
+}
