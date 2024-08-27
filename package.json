@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "biome": "biome check .",
-    "biome:fix": "biome check --apply ."
+    "biome:fix": "biome check --write ."
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3"

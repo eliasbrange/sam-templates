@@ -6,7 +6,7 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "biome": "biome check .",
-    "biome:fix": "biome check --apply .",
+    "biome:fix": "biome check --write .",
     "build": "sam build",
     "deploy": "sam build && sam deploy",
     "sync": "sam sync --watch",
