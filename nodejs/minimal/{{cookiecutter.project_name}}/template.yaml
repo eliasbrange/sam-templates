@@ -36,8 +36,7 @@ Resources:
   ApiFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: src/functions
-      Handler: api.handler
+      Handler: src/functions/api.handler
       Events:
         TodoApi:
           Type: HttpApi
